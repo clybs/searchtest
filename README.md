@@ -3,6 +3,7 @@
 Search what stuff near where.
 
   - Note: You need to supply your own config
+  - http://localhost:3000/
 
 ### Installation
 
