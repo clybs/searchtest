@@ -1,0 +1,157 @@
+extends layout
+
+block content
+    main
+        // Header
+        header#js-header.u-header.u-header--static.u-header--toggle(data-header-fix-moment='500', data-header-fix-effect='slide')
+            .u-header__section.u-header__section--light.g-bg-white.g-transition-0_3.g-py-10(data-header-fix-moment-exclude='g-bg-white g-py-10', data-header-fix-moment-classes='g-bg-white-opacity-0_9 u-shadow-v18 g-py-3')
+                nav.js-mega-menu.navbar.navbar-toggleable-md
+                    .container
+                        // Responsive Toggle Button
+                        button.navbar-toggler.navbar-toggler-right.btn.g-line-height-1.g-brd-none.g-pa-0.g-pos-abs.g-right-0(type='button', aria-label='Toggle navigation', aria-expanded='false', aria-controls='navBar', data-toggle='collapse', data-target='#navBar')
+                            span.hamburger.hamburger--slider
+                                span.hamburger-box
+                                    span.hamburger-inner
+                        // End Responsive Toggle Button
+                        // Logo
+                        a.navbar-brand(href='#')
+                            img(src='/images/logo/logo-0.png', width=170, height=90, alt='SearchTest')
+                        // End Logo
+        // End Header
+        // Page Title
+        section.dzsparallaxer.auto-init.height-is-based-on-content.use-loading(data-options='{direction: "reverse", settings_mode_oneelement_max_offset: "150"}')
+            // Parallax Image
+            .divimage.dzsparallaxer--target.w-100.g-bg-cover.g-bg-white-gradient-opacity-v3--after(style='height: 140%; background-image: url(/images/img-temp/1920x800/img10.jpg);')
+            // End Parallax Image
+            .container.text-center.g-py-100--md.g-py-80
+                h2.h1.text-uppercase.g-font-weight-300.g-mb-30 Search Results
+                // Search Form
+                form.g-width-60x--md.mx-auto(action='/', method='GET')
+                    .form-group.g-mb-20
+                        .input-group.u-shadow-v21.rounded.g-mb-15
+                            if what != undefined
+                                input.form-control.form-control-md.g-brd-white.g-font-size-16.border-right-0.pr-0.g-py-15(type='text', name='what', placeholder='Find what?', value='#{what}')
+                            else
+                                input.form-control.form-control-md.g-brd-white.g-font-size-16.border-right-0.pr-0.g-py-15(type='text', name='what', placeholder='Find what?')
+                            if where != undefined
+                                input.form-control.form-control-md.g-brd-white.g-font-size-16.border-right-0.pr-0.g-py-15(type='text', name='where', placeholder='Near where?', value='#{where}')
+                            else
+                                input.form-control.form-control-md.g-brd-white.g-font-size-16.border-right-0.pr-0.g-py-15(type='text', name='where', placeholder='Near where?')
+                            .input-group-addon.d-flex.align-items-center.g-bg-white.g-brd-white.g-color-gray-light-v1.g-pa-2
+                                button.btn.u-btn-primary.g-font-size-16.g-py-15.g-px-20(type='submit')
+                                    i.icon-magnifier.g-pos-rel.g-top-1
+                        small.form-text.g-opacity-0_8.g-font-size-default Search any words, questions and so on here.
+                // End Search Form
+        // Page Title
+        section.g-pt-50.g-pb-90
+            .container
+                // Search Info
+                .d-md-flex.justify-content-between.g-mb-30
+                    if results != undefined
+                        h3.h6.text-uppercase.g-mb-10.g-mb--lg
+                            |  About
+                            span.g-color-gray-dark-v1  #{results.total}
+                            |  results
+                // End Search Info
+                // Search Result
+                if results != undefined
+                    each business in results.businesses
+                        article
+                            h3.h4.g-mb-15
+                                if business.image_url
+                                    img.g-height-50.g-width-50.rounded-circle.g-mr-5(src='#{business.image_url}', alt='#{business.name}')
+                                a.u-link-v5.g-color-gray-dark-v1.g-color-primary--hover(href='#{business.url}') #{business.name}
+                            p.g-mb-15
+                                |  Category: #{business.categories}
+                                br
+                                |  Address: #{business.address}
+                            .d-lg-flex.justify-content-between.align-items-center
+                                // Search Info
+                                ul.list-inline.g-mb-10.g-mb-0--lg
+                                    li.list-inline-item.g-mr-30
+                                        i.icon-clock.g-pos-rel.g-top-1.g-color-gray-dark-v5.g-mr-5
+                                        if  business.is_closed
+                                            |  Closed
+                                        else
+                                            |  Open
+                                    if business.display_phone
+                                        li.list-inline-item.g-mr-30
+                                            i.icon-phone.g-pos-rel.g-top-1.g-color-gray-dark-v5.g-mr-5
+                                            |  #{business.display_phone}
+                                // End Search Info
+                                // Search Rating
+                                div
+                                    div.js-g-map.embed-responsive.embed-responsive-21by9(id='#{business.id}', data-type='terrain', data-lat='#{business.coordinates.latitude}', data-lng='#{business.coordinates.longitude}', data-title='HTMLSTREAM', data-pin='true')
+                                    span.js-rating.g-color-primary.mr-2(data-rating='#{business.rating}')
+                                    span.g-color-gray-dark-v5 Rating of #{business.rating} out of #{business.review_count} vote(s)
+                            // End Search Rating
+                        // End Search Result
+                        hr.g-brd-gray-light-v4.g-my-40
+    // JS Global Compulsory
+    script(src='/vendor/jquery/jquery.min.js')
+    script(src='/vendor/tether.min.js')
+    script(src='/vendor/bootstrap/bootstrap.min.js')
+    // JS Implementing Plugins
+    script(src='/vendor/hs-megamenu/src/hs.megamenu.js')
+    script(src='/vendor/appear.js')
+    script(src='/vendor/circles/circles.min.js')
+    script(src='/vendor/dzsparallaxer/dzsparallaxer.js')
+    script(src='/vendor/dzsparallaxer/dzsscroller/scroller.js')
+    script(src='/vendor/dzsparallaxer/advancedscroller/plugin.js')
+    script(src='/vendor/gmaps/gmaps.min.js')
+    // JS Unify
+    script(src='/javascripts/hs.core.js')
+    script(src='/javascripts/helpers/hs.hamburgers.js')
+    script(src='/javascripts/helpers/hs.focus-state.js')
+    script(src='/javascripts/components/hs.header.js')
+    script(src='/javascripts/components/hs.popup.js')
+    script(src='/javascripts/components/hs.counter.js')
+    script(src='/javascripts/components/hs.rating.js')
+    script(src='/javascripts/components/gmap/hs.map.js')
+    // JS Customization
+    script(src='/javascripts/custom.js')
+    // JS Plugins Init.
+    script.
+        // Header
+        $(document).on('ready', function () {
+            $.HSCore.components.HSHeader.init($('#js-header'));
+            $.HSCore.helpers.HSHamburgers.init('.hamburger');
+            // Initialization of HSMegaMenu plugin
+            $('.js-mega-menu').HSMegaMenu({
+                event: 'hover',
+                pageContainer: $('.container'),
+                breakpoint: 991
+            });
+        });
+    script.
+        // Maps
+        function initMap() {
+            $.HSCore.components.HSGMap.init('.js-g-map');
+        }
+    script(src='https://maps.googleapis.com/maps/api/js?key=#{map}&callback=initMap', async='', defer='')
+    script.
+        $(document).on('ready', function () {
+            // Toolttips
+            $('[data-toggle="tooltip"]').tooltip();
+            // Form Focus State
+            $.HSCore.helpers.HSFocusState.init();
+            // initialization of counters
+            var counters = $.HSCore.components.HSCounter.init('[class*="js-counter"]');
+            // Rating
+            $.HSCore.components.HSRating.init($('.js-rating'), {
+                spacing: 2
+            });
+            // Parallax
+            dzsas_init('#as0', {
+                settings_mode: 'onlyoneitem',
+                design_arrowsize: '0',
+                settings_swipe: 'on',
+                settings_swipeOnDesktopsToo: 'on',
+                settings_slideshow: 'on',
+                settings_slideshowTime: '300',
+                settings_autoHeight: 'off',
+                settings_transition: 'fade',
+                settings_centeritems: false
+            });
+        });
+  

@@ -1,0 +1,33 @@
+{
+  "name": "SearchTest",
+  "version": "1.0.0",
+  "description": "Search Test v1.0.",
+  "author": "Cliburn M. Solano",
+  "private": true,
+  "jest": {
+    "verbose": true,
+    "watch": true
+  },
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "jade": "~1.11.0",
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.30",
+    "morgan": "~1.8.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "superagent": "^3.5.2",
+    "supertest": "^3.0.0"
+  }
+}

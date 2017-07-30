@@ -1,0 +1,15 @@
+# Runtime data
+tmp/
+
+#IDE
+**/.idea
+
+# OS
+.DS_Store
+.tmp
+
+# Dependency directory
+/node_modules
+
+# Reports
+coverage
