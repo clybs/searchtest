@@ -3,7 +3,8 @@
 Search what stuff near where.
 
   - Note: You need to supply your own config
-  - http://localhost:3000/
+  - http://localhost:8080/
+  - Runs on Node V8
 
 ### Installation
 
